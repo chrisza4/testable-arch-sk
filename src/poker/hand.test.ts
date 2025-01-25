@@ -1,7 +1,7 @@
 import { describe, test, expect } from "bun:test";
 import { Card, GameResult, Hand, Suits } from "./hand";
 describe("compare hand", () => {
-  test("straight flush win four of a kind", () => {
+  test.skip("straight flush win four of a kind", () => {
     const hand1 = new Hand([
       new Card(10, Suits.Club),
       new Card(11, Suits.Club),

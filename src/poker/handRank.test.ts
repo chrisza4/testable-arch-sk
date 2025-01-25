@@ -210,25 +210,28 @@ describe("Hand rank comparison", () => {
     });
   });
 
-  describe("Same rank, decide by highs", () => {
-    test("When highs is higher, return win", () => {
-      // Notes: We can test every rank, but it can be overkilled
-      // This is a place where we actually "designed"
-      const thisRank = new HandRank(Rank.FullHouse, [10, 3]);
-      const otherRank = new HandRank(Rank.FullHouse, [9, 1]);
-      expect(thisRank.compare(otherRank)).toEqual(GameResult.Win);
-    });
+  describe.each([[Rank.FullHouse], [Rank.FourOfAKind]])(
+    "Same rank, decide by highs",
+    (rank) => {
+      test("When highs is higher, return win", () => {
+        // Notes: We can test every rank and highs combination, but it can be overkilled
+        // This is a place where we actually "designed" by sampling
+        const thisRank = new HandRank(rank, [10, 3]);
+        const otherRank = new HandRank(rank, [9, 1]);
+        expect(thisRank.compare(otherRank)).toEqual(GameResult.Win);
+      });
 
-    test("When highs is lower, return lost", () => {
-      const thisRank = new HandRank(Rank.FullHouse, [12, 11]);
-      const otherRank = new HandRank(Rank.FullHouse, [14, 13]);
-      expect(thisRank.compare(otherRank)).toEqual(GameResult.Lose);
-    });
+      test("When highs is lower, return lost", () => {
+        const thisRank = new HandRank(rank, [12, 11]);
+        const otherRank = new HandRank(rank, [14, 13]);
+        expect(thisRank.compare(otherRank)).toEqual(GameResult.Lose);
+      });
 
-    test("When highs is equals, return draw", () => {
-      const thisRank = new HandRank(Rank.FullHouse, [12, 11]);
-      const otherRank = new HandRank(Rank.FullHouse, [12, 11]);
-      expect(thisRank.compare(otherRank)).toEqual(GameResult.Draw);
-    });
-  });
+      test("When highs is equals, return draw", () => {
+        const thisRank = new HandRank(rank, [12, 11]);
+        const otherRank = new HandRank(rank, [12, 11]);
+        expect(thisRank.compare(otherRank)).toEqual(GameResult.Draw);
+      });
+    }
+  );
 });
