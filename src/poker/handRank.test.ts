@@ -2,22 +2,22 @@ import { describe, test, expect } from "bun:test";
 import { Rank, HandRank } from "./handRank";
 import { GameResult } from "./hand";
 
-describe("Hand rank comparison", () => {
-  const allRanks = [
-    Rank.Nothing,
-    Rank.OnePair,
-    Rank.TwoPairs,
-    Rank.ThreeOfAKind,
-    Rank.Straight,
-    Rank.Flush,
-    Rank.FullHouse,
-    Rank.FourOfAKind,
-    Rank.StraightFlush,
-  ];
-  function allRankExcept(excepts: Rank[]) {
-    return allRanks.filter((c) => !excepts.includes(c));
-  }
+const allRanks = [
+  Rank.Nothing,
+  Rank.OnePair,
+  Rank.TwoPairs,
+  Rank.ThreeOfAKind,
+  Rank.Straight,
+  Rank.Flush,
+  Rank.FullHouse,
+  Rank.FourOfAKind,
+  Rank.StraightFlush,
+];
+function allRankExcept(excepts: Rank[]) {
+  return allRanks.filter((c) => !excepts.includes(c));
+}
 
+describe("Hand rank comparison", () => {
   describe("Decide by higher rank", () => {
     test("Straight flush win every other rank", () => {
       const toWin = allRankExcept([Rank.StraightFlush]);

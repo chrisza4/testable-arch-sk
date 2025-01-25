@@ -1,4 +1,4 @@
-import { GameResult } from "./hand";
+import { GameResult, Hand } from "./hand";
 
 export enum Rank {
   Nothing = 0,
