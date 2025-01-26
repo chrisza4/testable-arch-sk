@@ -1,3 +1,5 @@
+import { handRankFromHand } from "./handRank";
+
 export enum Suits {
   Spade,
   Diamond,
@@ -22,6 +24,8 @@ export class Hand {
   }
 
   public compare(another: Hand): GameResult {
-    throw new Error("");
+    const thisRank = handRankFromHand(this);
+    const anotherRank = handRankFromHand(another);
+    return thisRank.compare(anotherRank);
   }
 }
