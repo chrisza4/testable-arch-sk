@@ -1,0 +1,7 @@
+POST http://localhost:3000/dpi/player1/showdown HTTP/1.1
+Content-type: application/json; charset=utf8
+X-User: 1
+
+{
+    "another_player_id": "player_2"
+}
