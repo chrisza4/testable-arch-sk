@@ -1,4 +1,5 @@
-import { describe, test, expect } from "bun:test";
+import { describe, test, expect, mock, spyOn } from "bun:test";
+import { vi } from "vitest";
 import { HandComparison } from "./model";
 import { GameResult } from "../poker/hand";
 import { Controller } from "./controller";
@@ -166,5 +167,25 @@ describe("controller", () => {
     expect(result.status).toEqual(200);
     const body = await result.json();
     expect(body["result"]).toEqual("draw");
+  });
+
+  test("alternative: using mock to test - should return 200 and win when win", async () => {
+    const handComparison = new HandComparison();
+    handComparison.compare = mock(() => GameResult.Win);
+
+    const subject = new Controller(new HandComparison());
+    const request = new Request(
+      new URL(`/api/${simplePlayerId}/showdown`, "http://host.com"),
+      {
+        method: "POST",
+        body: JSON.stringify({
+          another_player_id: uuid.v4(),
+        }),
+      }
+    );
+    const result = await subject.handle(request);
+    expect(result.status).toEqual(200);
+    const body = await result.json();
+    expect(body["result"]).toEqual("win");
   });
 });
