@@ -1,5 +1,4 @@
 import { describe, test, expect, mock, spyOn } from "bun:test";
-import { vi } from "vitest";
 import { HandComparison } from "./model";
 import { GameResult } from "../poker/hand";
 import { Controller } from "./controller";
