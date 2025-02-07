@@ -1,3 +1,36 @@
+/* 
+
+Write model layer and hand data layer, including test
+
+Helping
+- Using sqlite for simplicity
+- Hand data is already being scaffold
+- Initial DB
+
+Spec of Hand Data:
+  - If data exists, return Hand object with cards
+  - If data does not exists, throw error('Object not found')
+
+Addition to hand
+  - Add validate method. If hand have exactly 5 card, return true. Otherwise, false
+
+Spec of hand model
+  - Use hand data to get hand info
+    - If hand data error 'Object not found', throw error ('Cannot find hand')
+    - If hand data is invalid (using hand validation method), throw error ('Cannot find hand')
+      - This system assume that hand with less than 5 card = some error = hand not found
+  - Determine win / lose result
+
+Cover everything with test.
+
+Interesting question:
+- How to we test data layer?
+  - Use integration testing on data layer
+- How to test model individually?
+  - Leave for excersise
+
+*/
+
 import * as uuid from "uuid";
 import { Database } from "bun:sqlite";
 import type { Hand } from "../poker/hand";
