@@ -3,5 +3,5 @@ Content-type: application/json; charset=utf8
 X-User: 1
 
 {
-    "another_player_id": "player_2"
+    "another_hand_id": "player_2"
 }

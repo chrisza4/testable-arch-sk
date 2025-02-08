@@ -45,7 +45,7 @@ describe("controller", () => {
     expect(body).toEqual("invalid request");
   });
 
-  test("should return 422 with invalid request when body is json but does not have another_player_id", async () => {
+  test("should return 422 with invalid request when body is json but does not have another_hand_id", async () => {
     const subject = new Controller(new MockHandComparison());
     const request = new Request(
       new URL(`/api/${simplePlayerId}/showdown`, "http://host.com"),
@@ -62,14 +62,14 @@ describe("controller", () => {
     expect(body).toEqual("invalid request");
   });
 
-  test("should return 422 with invalid request when another_player_id is not uuid", async () => {
+  test("should return 422 with invalid request when another_hand_id is not uuid", async () => {
     const subject = new Controller(new MockHandComparison());
     const request = new Request(
       new URL(`/api/${simplePlayerId}/showdown`, "http://host.com"),
       {
         method: "POST",
         body: JSON.stringify({
-          another_player_id: "just a string",
+          another_hand_id: "just a string",
         }),
       }
     );
@@ -86,7 +86,7 @@ describe("controller", () => {
       {
         method: "POST",
         body: JSON.stringify({
-          another_player_id: uuid.v4(),
+          another_hand_id: uuid.v4(),
         }),
       }
     );
@@ -112,7 +112,7 @@ describe("controller", () => {
       {
         method: "POST",
         body: JSON.stringify({
-          another_player_id: uuid.v4(),
+          another_hand_id: uuid.v4(),
         }),
       }
     );
@@ -129,7 +129,7 @@ describe("controller", () => {
       {
         method: "POST",
         body: JSON.stringify({
-          another_player_id: uuid.v4(),
+          another_hand_id: uuid.v4(),
         }),
       }
     );
@@ -146,7 +146,7 @@ describe("controller", () => {
       {
         method: "POST",
         body: JSON.stringify({
-          another_player_id: uuid.v4(),
+          another_hand_id: uuid.v4(),
         }),
       }
     );
@@ -163,7 +163,7 @@ describe("controller", () => {
       {
         method: "POST",
         body: JSON.stringify({
-          another_player_id: uuid.v4(),
+          another_hand_id: uuid.v4(),
         }),
       }
     );
@@ -185,7 +185,7 @@ describe("controller", () => {
       {
         method: "POST",
         body: JSON.stringify({
-          another_player_id: uuid.v4(),
+          another_hand_id: uuid.v4(),
         }),
       }
     );

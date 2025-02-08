@@ -24,8 +24,11 @@ describe("Data", () => {
       ("${uuid.v4()}", "${handId}", 13, "spade");
     INSERT INTO cards (id, handId, number, suit) VALUES 
       ("${uuid.v4()}", "${handId}", 10, "spade");
+    INSERT INTO cards (id, handId, number, suit) VALUES 
+      ("${uuid.v4()}", "randomHandId", 11, "spade");
       `);
     const result = subject.getHandById(handId);
+    expect(result.cards.length).toEqual(5);
     expect(result.cardExists(new Card(13, Suits.Heart)));
     expect(result.cardExists(new Card(12, Suits.Diamond)));
     expect(result.cardExists(new Card(13, Suits.Club)));

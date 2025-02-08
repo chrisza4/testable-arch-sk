@@ -3,18 +3,20 @@ import { HandData } from "./data";
 import { HandComparison } from "./model";
 import { Database } from "bun:sqlite";
 
-Bun.serve({
-  async fetch(req) {
-    return new Controller(
-      new HandComparison(new HandData(new Database("cards.sqlite")))
-    ).handle(req);
-  },
-  error(e) {
-    return new Response(`Error:${e.message}`, {
-      status: 500,
-    });
-  },
-  port: 3000,
-});
+export function startServer(dbName: string = "cards.sqlite") {
+  Bun.serve({
+    async fetch(req) {
+      return new Controller(
+        new HandComparison(new HandData(new Database(dbName)))
+      ).handle(req);
+    },
+    error(e) {
+      return new Response(`Error:${e.message}`, {
+        status: 500,
+      });
+    },
+    port: 3000,
+  });
 
-console.log("Start Server");
+  console.log("Start Server");
+}

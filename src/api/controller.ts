@@ -20,7 +20,7 @@ export class Controller {
     const handId = match[1];
     try {
       const body = await req.json();
-      const anotherHandId = body["another_player_id"];
+      const anotherHandId = body["another_hand_id"];
       if (!anotherHandId) {
         return new Response("invalid request", { status: 422 });
       }
