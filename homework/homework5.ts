@@ -33,7 +33,7 @@ Interesting question:
 
 import * as uuid from "uuid";
 import { Database } from "bun:sqlite";
-import type { Hand } from "../poker/hand";
+import { Hand } from "../src/poker/hand";
 export class HandData {
   private db: Database;
 
@@ -51,7 +51,12 @@ export class HandData {
       number INTEGER,
       suit TEXT
     );
-  
+  `);
+    console.log("Table created successfully!");
+  }
+
+  seed() {
+    this.db.run(`
     INSERT INTO hands (id) VALUES ("38657dac-446c-4b98-bc9f-09f4daeeb30f");
     INSERT INTO cards (id, handId, number, suit) VALUES 
       ("${uuid.v4()}", "38657dac-446c-4b98-bc9f-09f4daeeb30f", 13, "heart");
@@ -74,8 +79,7 @@ export class HandData {
       ("${uuid.v4()}", "55314f63-9631-4d37-b7e7-2cf3748706aa", 12, "spade");
     INSERT INTO cards (id, handId, number, suit) VALUES 
       ("${uuid.v4()}", "55314f63-9631-4d37-b7e7-2cf3748706aa", 10, "spade");
-  `);
-    console.log("Table created successfully!");
+      `);
   }
 
   getHandById(handId: string): Hand {

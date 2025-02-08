@@ -3,11 +3,13 @@ import { HandComparison } from "./model";
 import { GameResult } from "../poker/hand";
 import { Controller } from "./controller";
 import * as uuid from "uuid";
+import { HandData } from "./data";
+import { Database } from "bun:sqlite";
 
 class MockHandComparison extends HandComparison {
   private gameResult: GameResult;
   constructor(gameResult: GameResult = GameResult.Win) {
-    super();
+    super(new HandData(new Database(":memory:")));
     this.gameResult = gameResult;
   }
   compare(handId: string, anotherHandId: string): GameResult {
@@ -95,6 +97,9 @@ describe("controller", () => {
   });
 
   class MockErrorHandComparison extends HandComparison {
+    constructor() {
+      super(new HandData(new Database(":memory:")));
+    }
     compare(handId: string, anotherHandId: string): GameResult {
       throw new Error("Cannot find hand");
     }
@@ -169,10 +174,12 @@ describe("controller", () => {
   });
 
   test("alternative: using mock to test - should return 200 and win when win", async () => {
-    const handComparison = new HandComparison();
+    const handComparison = new HandComparison(
+      new HandData(new Database(":memory:"))
+    );
     handComparison.compare = mock(() => GameResult.Win);
 
-    const subject = new Controller(new HandComparison());
+    const subject = new Controller(handComparison);
     const request = new Request(
       new URL(`/api/${simplePlayerId}/showdown`, "http://host.com"),
       {
