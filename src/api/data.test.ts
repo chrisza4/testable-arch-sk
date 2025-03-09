@@ -5,7 +5,7 @@ import { HandData } from "./data";
 import { Card, Suits } from "../poker/hand";
 
 describe("Data", () => {
-  test("GetById", () => {
+  test("GetById return set of cards corresponding to id", () => {
     const db = new Database("test.sqlite");
 
     const handId = uuid.v4();
@@ -38,6 +38,16 @@ describe("Data", () => {
     // Cleanup
     db.run(`DELETE FROM hands; 
       DELETE FROM cards;`);
+  });
+
+  test("GetById throw error 'object not found' when hands is not exists", () => {
+    const db = new Database("test.sqlite");
+
+    const handId = "not_exists_id";
+    const subject = new HandData(db);
+    subject.initDb();
+
+    expect(() => subject.getHandById(handId)).toThrowError("Object not found");
   });
 
   afterEach(() => {

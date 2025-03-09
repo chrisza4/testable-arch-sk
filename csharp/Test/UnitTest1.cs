@@ -21,11 +21,13 @@ public class UnitTest1
             return 5;
         }
     }
+
     [Fact]
     public void Test()
     {
         var mockDependency = new Mock<Dependency>();
         mockDependency.Setup(m => m.GetValueFromExternalSystem()).Returns(10);
+
         var subject = new Subject(mockDependency.Object);
         Assert.Equal(40, subject.MyMethod());
     }

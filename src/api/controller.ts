@@ -1,5 +1,5 @@
 import * as uuid from "uuid";
-import type { HandComparison } from "./model";
+import { HandComparison } from "./model";
 import { GameResult } from "../poker/hand";
 
 export class Controller {
