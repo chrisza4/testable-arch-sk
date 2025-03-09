@@ -47,12 +47,15 @@ export function handRankFromHand(hand: Hand): HandRank {
   // How to check
   // 1 -> Check card number duplication frequency
   //     (3 1 1) = 3 of a kind
-  //     (3 2) = Full hose
+  //     (3 2) = Full house
   //     (4 1) = 4 of a kind
   //     (2 2 1) = 2 pairs
-  // This worth havinga nother subunit: Transform cards to freqeuncy
-  // 2 -> Check consecutive (Ace first, Ace lst)
+  // This worth having nother subunit: Transform cards to freqeuncy
+  // 2 -> Check consecutive (Ace first, Ace last)
+  // 10 J Q K A -> Straight
+  // A 2 3 4 5 -> Straight
   // 3 -> Check flush
+  // Noted that 2,3 is too small to have unit
 
   let cardSorted = hand.cards.sort((a, b) => b.number - a.number);
 
