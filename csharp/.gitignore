@@ -1,0 +1,26 @@
+# Ignore Visual Studio and Rider specific files
+.vs/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Ignore build and output directories
+bin/
+obj/
+out/
+Debug/
+Release/
+
+# Ignore NuGet packages
+*.nupkg
+*.snupkg
+packages/
+.nuget/
+
+# Ignore logs and generated files
+*.log
+*.tlog
+*.cache
+*.
