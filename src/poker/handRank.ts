@@ -43,12 +43,23 @@ function arrayValueEquals(arr1: number[], arr2: number[]): boolean {
   return true;
 }
 export function handRankFromHand(hand: Hand): HandRank {
+  // How to check
+  // 1 -> Check card number duplication frequency
+  //     (3 1 1) = 3 of a kind
+  //     (3 2) = Full hose
+  //     (4 1) = 4 of a kind
+  //     (2 2 1) = 2 pairs
+  // This worth havinga nother subunit: Transform cards to freqeuncy
+  // 2 -> Check consecutive (Ace first, Ace lst)
+  // 3 -> Check flush
+
   let cardSorted = hand.cards.sort((a, b) => b.number - a.number);
 
   const cardNumbers = [];
   for (const card of cardSorted) {
     cardNumbers.push(card.number);
   }
+
   // Special case for straight ace first
   if (arrayValueEquals(cardNumbers, [14, 5, 4, 3, 2])) {
     cardSorted[0].number = 1;
@@ -61,6 +72,7 @@ export function handRankFromHand(hand: Hand): HandRank {
       cardSorted[0],
     ];
   }
+
   const consequtive = isConsecutive(cardSorted);
   const flush = isFlush(cardSorted);
   const cardFrequency = new CardFrequency(hand.cards);
