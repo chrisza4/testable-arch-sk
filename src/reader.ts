@@ -1,18 +1,18 @@
 import fs from "fs";
 import { Card, Hand, Suits } from "./poker/hand";
-import z, { number, ZodError } from "zod";
+import z, { ZodError } from "zod";
 
 const schema = z.object({
   player1: z.array(
     z.object({
       suits: z.enum(["spade", "heart", "club", "diamond"]),
-      number: z.number().max(13).min(1),
+      number: z.number().max(14).min(2),
     })
   ),
   player2: z.array(
     z.object({
       suits: z.enum(["spade", "heart", "club", "diamond"]),
-      number: z.number().max(13).min(1),
+      number: z.number().max(14).min(2),
     })
   ),
 });

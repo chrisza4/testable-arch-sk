@@ -10,7 +10,8 @@ describe("reader", () => {
     );
     const actual = cardReader.read();
     expect(actual.length).toEqual(2);
-    const [hand1, hand2] = actual;
+    const hand1 = actual[0];
+    const hand2 = actual[1];
 
     expect(hand1.cards[0].suits).toEqual(Suits.Spade);
     expect(hand1.cards[0].number).toEqual(3);
@@ -67,4 +68,6 @@ describe("reader", () => {
       expect(() => cardReader.read()).toThrowError("invalid_json_input");
     });
   });
+
+  // Should we also test suits and number validity??
 });
